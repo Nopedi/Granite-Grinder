@@ -29,7 +29,7 @@ int goal_r = 90;
 
 String input = "";
 
-BLEService granite_grinder("5B12"); // BLE LED Service
+BLEService granite_grinder("5B12"); // BLE Service, random address becaus default address is blocked by Windows
 
 BLEByteCharacteristic walking_speed_characteristic("1111", BLEWrite);
 BLEByteCharacteristic step_size_characteristic("1112", BLEWrite);
@@ -60,7 +60,7 @@ void setup() {
   digitalWrite(LED_BUILTIN, LOW);         // when the central disconnects, turn off the LED
   digitalWrite(LEDR, HIGH);               // will turn the LED off
   digitalWrite(LEDG, HIGH);               // will turn the LED off
-  digitalWrite(LEDB, HIGH);                // will turn the LED off
+  digitalWrite(LEDB, HIGH);               // will turn the LED off
 
   servo_h.attach(servo_h_pin);
   servo_r.attach(servo_r_pin);
@@ -95,6 +95,7 @@ void setup() {
   granite_grinder.addCharacteristic(slide_size_L_characteristic);
   granite_grinder.addCharacteristic(slide_size_R_characteristic);
   granite_grinder.addCharacteristic(reset_characteristic);
+  
   // add service
   BLE.addService(granite_grinder);
 
@@ -199,7 +200,4 @@ void bluetoothZeug() {
     digitalWrite(LEDG, HIGH);         // will turn the LED off
     digitalWrite(LEDB, HIGH);         // will turn the LED off
   }
-  //digitalWrite(LEDR, HIGH);         // will turn the LED off
-  //digitalWrite(LEDG, HIGH);         // will turn the LED off
-  //digitalWrite(LEDB, HIGH);         // will turn the LED off
 }
